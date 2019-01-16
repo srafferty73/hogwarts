@@ -31,4 +31,31 @@ class Hogwarts
      @id = harry_data.first()['id'].to_i
    end
 
+   def self.all()
+     sql = "SELECT * FROM hogwarts"
+     students = SqlRunner.run( sql )
+     result = students.map { |student| Hogwarts.new( student ) }
+     return result
+   end
+
+   def self.delete_all()
+     sql = "DELETE FROM hogwarts"
+     SqlRunner.run(sql)
+   end
+
+   def delete()
+     sql = "DELETE FROM hogwarts
+     WHERE id = $1"
+     values = [@id]
+     SqlRunner.run( sql, values )
+   end
+
+   def self.find( id )
+     sql = "SELECT * FROM hogwarts WHERE id = $1"
+     values = [id]
+     student = SqlRunner.run( sql, values )
+     result = Hogwarts.new( student.first )
+     return result
+   end
+
 end

@@ -1,5 +1,7 @@
 require_relative('../models/hogwarts')
 
+Hogwarts.delete_all()
+
 student1 = Hogwarts.new({
   "first_name" => "Harry",
   "last_name" => "Potter",
