@@ -1,0 +1,22 @@
+<h1>Add New Student</h1>
+
+<form action="/hogwarts-students" method="post">
+ <label for="first-name">First name:</label>
+ <input type="text" id="first-name" name="first_name" placeholder="First name" value="">
+
+ <label for="last-name">Last name:</label>
+ <input type="text" id="last-name" name="last_name" placeholder="Last name"value="">
+
+ <label for="age">Age:</label>
+ <input type="number" id="age" name="age" placeholder="12" min = 12 value="">
+
+ <label for="house">Select a house:</label>
+ <select id= "house" name="house">
+   <option value="Gryffindor">Gryffindor</option>
+   <option value="Ravenclaw">Ravenclaw</option>
+   <option value="Hufflepuff">Hufflepuff</option>
+   <option value="Slytherin">Slytherin</option>
+ </select>
+
+ <input type="submit" value="Add New Student">
+</form>

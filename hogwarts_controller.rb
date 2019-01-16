@@ -15,3 +15,16 @@ get '/hogwarts-students' do
  #Display a list of all the students
  erb(:index)
 end
+
+#NEW
+get '/hogwarts-students/new' do
+ erb(:new)
+end
+#CREATE
+post '/hogwarts-students' do
+ # Create a new student object
+ Hogwarts.new( params ).save
+ # Save to the db
+ # Redirect the browser to '/hogwarts-students'
+ redirect to './hogwarts-students'
+end
