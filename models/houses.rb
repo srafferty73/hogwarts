@@ -6,7 +6,7 @@ class Houses
   attr_accessor :name
 
   def initialize(options)
-    @id = options['id'].to_i
+    @id = options['id'].to_i if options['id']
     @name = options['name']
     @logo_url = options['logo_url']
   end
@@ -25,10 +25,12 @@ class Houses
      (
        $1, $2
      )
-     RETURNING *"
+     RETURNING id"
      values = [@name, @logo_url]
      house_data = SqlRunner.run(sql, values)
-     @id = house_data.first()['id'].to_i
+     # @id = house_data.first()['id'].to_i
+     id = result.first["id"]
+     @id = id.to_i
    end
 
    def self.all()
@@ -51,11 +53,19 @@ class Houses
    end
 
    def self.find( id )
-     sql = "SELECT * FROM houses WHERE id = $1"
-     values = [id]
-     house = SqlRunner.run( sql, values )
-     result = Houses.new( house.first )
-     return result
+     sql = "SELECT * FROM houses"
+     #WHERE id = $1"
+     # values = [id]
+     # house = SqlRunner.run( sql, values )
+     # result = Houses.new( house.first )
+     # return result
+     house_data = SqlRunner.run(sql)
+     houses = map_items(house_data)
+     return houses
+   end
+
+   def self.map_items(house_data)
+    return house_data.map { |house| Houses.new(house) }
    end
 
 end
