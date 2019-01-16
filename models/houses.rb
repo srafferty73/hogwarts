@@ -2,8 +2,7 @@ require_relative('../db/sql_runner')
 
 class Houses
 
-  attr_reader :id, :logo_url
-  attr_accessor :name
+  attr_reader :id, :logo_url, :name
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
@@ -27,7 +26,7 @@ class Houses
      )
      RETURNING id"
      values = [@name, @logo_url]
-     house_data = SqlRunner.run(sql, values)
+     result = SqlRunner.run(sql, values)
      # @id = house_data.first()['id'].to_i
      id = result.first["id"]
      @id = id.to_i
@@ -35,9 +34,9 @@ class Houses
 
    def self.all()
      sql = "SELECT * FROM houses"
-     houses = SqlRunner.run( sql )
-     result = houses.map { |house| Houses.new( house ) }
-     return result
+     house_data = SqlRunner.run( sql )
+     houses = map_items(house_data)
+     return houses
    end
 
    def self.delete_all()
@@ -53,15 +52,12 @@ class Houses
    end
 
    def self.find( id )
-     sql = "SELECT * FROM houses"
-     #WHERE id = $1"
-     # values = [id]
-     # house = SqlRunner.run( sql, values )
-     # result = Houses.new( house.first )
-     # return result
-     house_data = SqlRunner.run(sql)
-     houses = map_items(house_data)
-     return houses
+     sql = "SELECT * FROM houses
+     WHERE id = $1"
+     values = [id]
+     result = SqlRunner.run(sql ,values).first
+     house = Houses.new(result)
+     return house
    end
 
    def self.map_items(house_data)

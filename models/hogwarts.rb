@@ -3,7 +3,7 @@ require_relative('../db/sql_runner')
 class Hogwarts
 
   attr_reader :id
-  attr_accessor :first_name, :last_name, :house_id, :age
+  attr_accessor  :age, :first_name, :last_name, :house_id
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
@@ -31,7 +31,7 @@ class Hogwarts
      )
      RETURNING id"
      values = [@first_name, @last_name, @house_id, @age]
-     harry_data = SqlRunner.run(sql, values)
+     result = SqlRunner.run(sql, values)
      # @id = harry_data.first()['id'].to_i
      id = result.first['id']
      @id = id
@@ -72,7 +72,7 @@ class Hogwarts
      values = [id]
      result = SqlRunner.run( sql, values ).first
      student = Hogwarts.new( result)
-     return result
+     return student
    end
 
 end

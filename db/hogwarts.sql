@@ -3,7 +3,7 @@ DROP TABLE houses;
 
 CREATE TABLE houses (
   -- id serial4 PRIMARY KEY,
-  id serial8 PRIMARY KEY,
+  id SERIAL8 PRIMARY KEY,
   name VARCHAR(255),
   logo_url VARCHAR(255)
 );

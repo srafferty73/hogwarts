@@ -13,6 +13,11 @@ house3 = Houses.new({'name' => 'hufflepuff', "logo_url" => "https://hottopic.sce
 house4 = Houses.new({'name' => 'slytherin', "logo_url" => "https://www.logolynx.com/images/logolynx/53/5390e974544de6279c4d9cb6253e3a2c.jpeg"
 })
 
+house1.save()
+house2.save()
+house3.save()
+house4.save()
+
 student1 = Hogwarts.new({
   "first_name" => "Harry",
   "last_name" => "Potter",
@@ -46,7 +51,7 @@ student2.save()
 student3.save()
 student4.save()
 
-s# house1 = Houses.new({
+# house1 = Houses.new({
 #   "name" => "Gryffindor",
 #   "logo_url" => "https://images-na.ssl-images-amazon.com/images/I/61CT7wPwCWL._SX355_.jpg"
 #   })
@@ -65,8 +70,3 @@ s# house1 = Houses.new({
 #   "name" => "Slytherin",
 #   "logo_url" => "https://www.logolynx.com/images/logolynx/53/5390e974544de6279c4d9cb6253e3a2c.jpeg"
 #   })
-
-house1.save()
-house2.save()
-house3.save()
-house4.save()
